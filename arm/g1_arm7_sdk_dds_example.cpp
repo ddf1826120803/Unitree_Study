@@ -94,6 +94,30 @@ int main(int argc, char const *argv[]) {
       JointIndex::kWaistRoll,
       JointIndex::kWaistPitch};
 
+  float weight = 0.f;
+  float weight_rate = 0.2f;
+
+  float kp = 60.f;
+  float kd = 1.5f;
+  float dq = 0.f;
+  float tau_ff = 0.f;
+
+  float control_dt = 0.02f;
+  float max_joint_velocity = 0.5f;
+
+  float delta_weight = weight_rate * control_dt;
+  float max_joint_delta = max_joint_velocity * control_dt;
+  auto sleep_time =
+      std::chrono::milliseconds(static_cast<int>(control_dt / 0.001f));
+
+  std::array<float, 17> init_pos{0, 0, 0, 0, 0, 0, 0,
+                                  0, 0, 0, 0, 0, 0, 0,
+                                  0, 0, 0};
+
+  std::array<float, 17> target_pos = {0.f, kPi_2,  0.f, kPi_2, 0.f, 0.f, 0.f,
+                                     0.f, -kPi_2, 0.f, kPi_2, 0.f, 0.f, 0.f,
+                                     0, 0, 0};
+
 
   // wait for init
   std::cout << "Press ENTER to init arms ...";
@@ -111,4 +135,33 @@ int main(int argc, char const *argv[]) {
 
   std::cout << "Done!" << std::endl;
   return 0;
+
+  // set init pos
+  std::cout << "Initailizing arms ...";
+  float init_time = 2.0f;
+  int init_time_steps = static_cast<int>(init_time / control_dt);
+
+  for (int i = 0; i < init_time_steps; ++i) {
+    // increase weight
+    weight = 1.0;
+    msg.motor_cmd().at(JointIndex::kNotUsedJoint).q(weight);
+    float phase = 1.0 * i / init_time_steps;
+    std::cout << "Phase: " << phase << std::endl;
+
+    // set control joints
+    for (int j = 0; j < init_pos.size(); ++j) {
+      msg.motor_cmd().at(arm_joints.at(j)).q(init_pos.at(j) * phase + current_jpos.at(j) * (1 - phase));
+      msg.motor_cmd().at(arm_joints.at(j)).dq(dq);
+      msg.motor_cmd().at(arm_joints.at(j)).kp(kp);
+      msg.motor_cmd().at(arm_joints.at(j)).kd(kd);
+      msg.motor_cmd().at(arm_joints.at(j)).tau(tau_ff);
+    }
+
+    // send dds msg
+    arm_sdk_publisher->Write(msg);
+
+    // sleep
+    std::this_thread::sleep_for(sleep_time);
+  }
+  std::cout << "Done!" << std::endl;
 }
