@@ -12,26 +12,49 @@ static const std::string kTopicArmSDK = "rt/arm_sdk";
 static const std::string kTopicState = "rt/lowstate";
 
 enum JointIndex {
-  // Left arm
-  kLeftShoulderPitch,
-  kLeftShoulderRoll,
-  kLeftShoulderYaw,
-  kLeftElbow,
-  kLeftWistRoll,
-  kLeftWistPitch,
-  kLeftWistYaw,
-  // Right arm
-  kRightShoulderPitch,
-  kRightShoulderRoll,
-  kRightShoulderYaw,
-  kRightElbow,
-  kRightWistRoll,
-  kRightWistPitch,
-  kRightWistYaw,
+    // Left leg
+    kLeftHipPitch,
+    kLeftHipRoll,
+    kLeftHipYaw,
+    kLeftKnee,
+    kLeftAnkle,
+    kLeftAnkleRoll,
 
-  kWaistYaw,
-  kWaistRoll,
-  kWaistPitch,
+    // Right leg
+    kRightHipPitch,
+    kRightHipRoll,
+    kRightHipYaw,
+    kRightKnee,
+    kRightAnkle,
+    kRightAnkleRoll,
+
+    kWaistYaw,
+    kWaistRoll,
+    kWaistPitch,
+
+    // Left arm
+    kLeftShoulderPitch,
+    kLeftShoulderRoll,
+    kLeftShoulderYaw,
+    kLeftElbow,
+    kLeftWistRoll,
+    kLeftWistPitch,
+    kLeftWistYaw,
+    // Right arm
+    kRightShoulderPitch,
+    kRightShoulderRoll,
+    kRightShoulderYaw,
+    kRightElbow,
+    kRightWistRoll,
+    kRightWistPitch,
+    kRightWistYaw,
+
+    kNotUsedJoint,
+    kNotUsedJoint1,
+    kNotUsedJoint2,
+    kNotUsedJoint3,
+    kNotUsedJoint4,
+    kNotUsedJoint5
 };
 
 int main(int argc, char const *argv[]) {
