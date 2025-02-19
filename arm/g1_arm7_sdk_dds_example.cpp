@@ -83,7 +83,7 @@ int main(int argc, char const *argv[]) {
         memcpy( &state_msg, s, sizeof( unitree_hg::msg::dds_::LowState_ ) );
   }, 1);
 
-  std::array<JointIndex, 17> arm_joints = {
+  std::array<JointIndex, 29> arm_joints = {
     JointIndex::kLeftHipPitch,
     JointIndex::kLeftHipRoll,
     JointIndex::kLeftHipYaw,
