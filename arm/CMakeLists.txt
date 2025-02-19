@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.16)
-project(g1_dual_arm)
-
-list(APPEND CMAKE_PREFIX_PATH "/opt/unitree_robotics/lib/cmake")
-find_package(unitree_sdk2 REQUIRED)
-
-add_executable(g1_dual_arm g1_dual_arm_example.cpp)
-target_link_libraries(g1_dual_arm  unitree_sdk2)
-target_compile_definitions(g1_dual_arm PUBLIC BLIB_DIR="${CMAKE_CURRENT_SOURCE_DIR}/low_level/behavior_lib/")
-
-SET(CMAKE_BUILD_TYPE Release)
+find_package(yaml-cpp QUIET)
+if(yaml-cpp_FOUND)
+    if (${yaml-cpp_VERSION} VERSION_GREATER_EQUAL "0.6")
+        message(STATUS "Found yaml-cpp version ${yaml-cpp_VERSION}")
+        add_executable(g1_dual_arm_example g1_dual_arm_example.cpp)
+        target_link_libraries(g1_dual_arm_example PRIVATE unitree_sdk2 yaml-cpp)
+        target_compile_definitions(g1_dual_arm_example PUBLIC BLIB_DIR="${CMAKE_CURRENT_SOURCE_DIR}/low_level/behavior_lib/")
+    else()
+        message(STATUS "yaml-cpp version ${yaml-cpp_VERSION} is too old, skipping build of g1_dual_arm_example.")
+    endif()
+endif()
