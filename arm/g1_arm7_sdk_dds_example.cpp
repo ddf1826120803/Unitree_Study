@@ -140,7 +140,7 @@ int main(int argc, char const *argv[]) {
   std::cin.get();
 
   // get current joint position
-  std::array<float, 17> current_jpos{};
+  std::array<float, 29> current_jpos{};
   std::cout <<"Current joint position: " << std::endl;
   for(int i = 0; i < arm_joints.size(); i++){
     std::cout << arm_joints.at(i) << ": ";
