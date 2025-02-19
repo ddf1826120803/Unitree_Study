@@ -86,7 +86,7 @@ int main(int argc, char const *argv[]) {
   std::cout << std::endl;
 
   std::cout << "All motor states:" << std::endl;
-  std::cout << state_msg.motor_state() << std::endl;
+//  std::cout << state_msg.motor_state() << std::endl;
 
   std::cout << "Done!" << std::endl;
   return 0;
