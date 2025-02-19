@@ -167,12 +167,13 @@ class G1Example {
   std::shared_ptr<MotionSwitcherClient> msc;
 
  public:
-  G1Example
+  G1Example(std::string networkInterface)
       : time_(0.0),
         control_dt_(0.002),
         duration_(3.0),
         mode_(PR),
         mode_machine_(0) {
+    ChannelFactory::Instance()->Init(1, networkInterface);
 
     msc.reset(new MotionSwitcherClient());
     msc->SetTimeout(5.0F);
@@ -182,7 +183,7 @@ class G1Example {
     while(queryMotionStatus())
     {
         std::cout << "Try to deactivate the motion control-related service." << std::endl;
-        int32_t ret = msc->ReleaseMode(); 
+        int32_t ret = msc->ReleaseMode();
         if (ret == 0) {
             std::cout << "ReleaseMode succeeded." << std::endl;
         } else {
@@ -354,13 +355,13 @@ class G1Example {
   {
       if(form == "0")
       {
-          if(name == "normal" ) return "sport_mode"; 
-          if(name == "ai" ) return "ai_sport"; 
-          if(name == "advanced" ) return "advanced_sport"; 
+          if(name == "normal" ) return "sport_mode";
+          if(name == "ai" ) return "ai_sport";
+          if(name == "advanced" ) return "advanced_sport";
       }
       else
       {
-          if(name == "ai-w" ) return "wheeled_sport(go2W)"; 
+          if(name == "ai-w" ) return "wheeled_sport(go2W)";
           if(name == "normal-w" ) return "wheeled_sport(b2W)";
       }
       return "";
@@ -392,17 +393,17 @@ class G1Example {
 };
 
 int main(int argc, char const *argv[]) {
-  if (argc < 2)
-  {
-    ChannelFactory::Instance()->Init(1, "lo");
+  if (argc < 2) {
+    std::cout << "Usage: g1_dual_arm_example network_interface_name"
+              << std::endl;
   }
-  else
-  {
-      ChannelFactory::Instance()->Init(0, argv[1]);
+  else{
+    exit(0);
   }
   std::cout << "Press enter to start";
   std::cin.get();
-  G1Example custom();
+  std::string networkInterface = "lo";
+  G1Example custom(networkInterface);
 
   while (true) sleep(10);
 
