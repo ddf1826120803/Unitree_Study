@@ -28,6 +28,10 @@ enum JointIndex {
   kRightWistRoll,
   kRightWistPitch,
   kRightWistYaw,
+
+  kWaistYaw,
+  kWaistRoll,
+  kWaistPitch,
 };
 
 int main(int argc, char const *argv[]) {
