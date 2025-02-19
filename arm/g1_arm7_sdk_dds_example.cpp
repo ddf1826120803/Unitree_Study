@@ -10,6 +10,8 @@
 
 static const std::string kTopicArmSDK = "rt/arm_sdk";
 static const std::string kTopicState = "rt/lowstate";
+constexpr float kPi = 3.141592654;
+constexpr float kPi_2 = 1.57079632;
 
 enum JointIndex {
     // Left leg
