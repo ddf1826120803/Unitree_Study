@@ -135,9 +135,6 @@ int main(int argc, char const *argv[]) {
   }
   std::cout << std::endl;
 
-  std::cout << "Done!" << std::endl;
-  return 0;
-
   // set init pos
   std::cout << "Initailizing arms ...";
   float init_time = 2.0f;
@@ -165,5 +162,7 @@ int main(int argc, char const *argv[]) {
     // sleep
     std::this_thread::sleep_for(sleep_time);
   }
+
   std::cout << "Done!" << std::endl;
+  return 0;
 }
