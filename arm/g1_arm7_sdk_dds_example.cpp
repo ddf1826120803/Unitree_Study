@@ -84,6 +84,18 @@ int main(int argc, char const *argv[]) {
   }, 1);
 
   std::array<JointIndex, 17> arm_joints = {
+    JointIndex::kLeftHipPitch,
+    JointIndex::kLeftHipRoll,
+    JointIndex::kLeftHipYaw,
+    JointIndex::kLeftKnee,
+    JointIndex::kLeftAnkle,
+    JointIndex::kLeftAnkleRoll,
+    JointIndex::kRightHipPitch,
+    JointIndex::kRightHipRoll,
+    JointIndex::kRightHipYaw,
+    JointIndex::kRightKnee,
+    JointIndex::kRightAnkle,
+    JointIndex::kRightAnkleRoll,
       JointIndex::kLeftShoulderPitch,  JointIndex::kLeftShoulderRoll,
       JointIndex::kLeftShoulderYaw,    JointIndex::kLeftElbow,
       JointIndex::kLeftWistRoll,       JointIndex::kLeftWistPitch,
@@ -112,8 +124,10 @@ int main(int argc, char const *argv[]) {
   auto sleep_time =
       std::chrono::milliseconds(static_cast<int>(control_dt / 0.001f));
 
-  std::array<float, 17> init_pos{0, 0, 0, 0, 0, 0, 0,
-                                  0, 0, 0, 0, 0, 0, 0,
+  std::array<float, 29> init_pos{0, 0, 0, 0, 0, 0,
+                                  0, 0, 0, 0, 0, 0,
+                                   0, 0, 0, 0, 0, 0, 0,
+                                    0, 0, 0, 0, 0, 0, 0,
                                   0, 0, 0};
 
   std::array<float, 17> target_pos = {0.f, kPi_2,  0.f, kPi_2, 0.f, 0.f, 0.f,
