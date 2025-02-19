@@ -1,3 +1,4 @@
+find_package(unitree_sdk2 REQUIRED)
 find_package(yaml-cpp QUIET)
 if(yaml-cpp_FOUND)
     if (${yaml-cpp_VERSION} VERSION_GREATER_EQUAL "0.6")
