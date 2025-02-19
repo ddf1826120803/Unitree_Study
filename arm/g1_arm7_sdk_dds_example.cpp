@@ -78,15 +78,13 @@ int main(int argc, char const *argv[]) {
 
   // get current joint position
   std::array<float, 17> current_jpos{};
-  std::cout <<"Current joint position: ";
+  std::cout <<"Current joint position: " << std::endl;
   for(int i = 0; i < arm_joints.size(); i++){
+    std::cout << arm_joints.at(i) << ": ";
     current_jpos.at(i) = state_msg.motor_state().at(arm_joints.at(i)).q();
-    std::cout << current_jpos.at(i) << " ";
+    std::cout << current_jpos.at(i) << std::endl;
   }
   std::cout << std::endl;
-
-  std::cout << "All motor states:" << std::endl;
-//  std::cout << state_msg.motor_state() << std::endl;
 
   std::cout << "Done!" << std::endl;
   return 0;
