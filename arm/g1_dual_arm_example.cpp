@@ -167,7 +167,7 @@ class G1Example {
   std::shared_ptr<MotionSwitcherClient> msc;
 
  public:
-  G1Example()
+  G1Example
       : time_(0.0),
         control_dt_(0.002),
         duration_(3.0),
